@@ -12,12 +12,13 @@ function GithubUserSearchInput(props: Props) {
 
   const [value, setValue] = useState('')
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => setValue(e.target.value)
-  const search = () => {
+  const submit: React.FormEventHandler<HTMLFormElement> = e => {
+    e.preventDefault()
     onSearch(value)
   }
 
   return (
-    <Box sx={{ padding: 1, paddingLeft: 0, display: 'flex' }}>
+    <Box component="form" onSubmit={submit} sx={{ padding: 1, paddingLeft: 0, display: 'flex', gap: 1 }}>
       <TextField
         id="outlined-basic"
         label="Enter username"
@@ -28,7 +29,13 @@ function GithubUserSearchInput(props: Props) {
         sx={{ flex: 1 }}
       />
       <Box sx={{ display: 'flex', justifyContent: 'center', width: 120 }}>
-        {loading ? <CircularProgress /> : <Button onClick={() => search()}>Search</Button>}
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <Button variant="contained" type="submit" sx={{ flex: 1 }}>
+            Search
+          </Button>
+        )}
       </Box>
     </Box>
   )
