@@ -8,6 +8,7 @@ import { fetchJson } from 'utils/common/fetchJson'
 import { IGithubUser } from '../types'
 
 import { IGithubApiRepository } from './GithubRepository'
+import GithubRepositoryList from './GithubRepositoryList'
 
 const accordionAnimationEndTimeout = 250
 
@@ -62,7 +63,9 @@ function GithubUser(props: Props) {
           </Link>
         </Box>
       </AccordionSummary>
-      <AccordionDetails>{error ? <Alert severity="error">{error}</Alert> : null}</AccordionDetails>
+      <AccordionDetails>
+        {error ? <Alert severity="error">{error}</Alert> : <GithubRepositoryList repos={repos} />}
+      </AccordionDetails>
     </Accordion>
   )
 }
