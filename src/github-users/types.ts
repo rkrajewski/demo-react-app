@@ -9,3 +9,11 @@ export interface IGithubUser {
 export interface IGithubUsersFeatureState {
   users: IGithubUser[]
 }
+
+export interface IGithubApiRepository {
+  id: number
+  name: string
+  description: string
+  html_url: string
+  stargazers_count: number
+}

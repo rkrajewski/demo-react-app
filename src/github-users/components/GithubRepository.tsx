@@ -3,13 +3,7 @@ import React from 'react'
 import StarIcon from '@mui/icons-material/Star'
 import { Box, Link, Paper, Typography } from '@mui/material'
 
-export interface IGithubApiRepository {
-  id: number
-  name: string
-  description: string
-  html_url: string
-  stargazers_count: number
-}
+import { IGithubApiRepository } from '../types'
 
 interface Props {
   repo: IGithubApiRepository

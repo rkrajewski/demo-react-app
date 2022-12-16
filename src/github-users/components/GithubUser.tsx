@@ -5,9 +5,8 @@ import { Accordion, AccordionDetails, AccordionSummary, Alert, Avatar, Box, Link
 
 import { fetchJson } from 'utils/common/fetchJson'
 
-import { IGithubUser } from '../types'
+import { IGithubApiRepository, IGithubUser } from '../types'
 
-import { IGithubApiRepository } from './GithubRepository'
 import GithubRepositoryList from './GithubRepositoryList'
 
 const accordionAnimationEndTimeout = 250

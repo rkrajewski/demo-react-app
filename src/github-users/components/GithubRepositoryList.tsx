@@ -2,7 +2,9 @@ import React from 'react'
 
 import { Alert, Box, Skeleton } from '@mui/material'
 
-import GithubRepository, { IGithubApiRepository } from './GithubRepository'
+import { IGithubApiRepository } from '../types'
+
+import GithubRepository from './GithubRepository'
 
 interface Props {
   repos: IGithubApiRepository[] | undefined
