@@ -2,8 +2,8 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Alert, Box } from '@mui/material'
-import GithubUserList from 'modules/github-users/components/GithubUserList'
-import GithubUserSearchInput from 'modules/github-users/components/GithubUserSearchInput'
+import GithubUserList from 'github-users/components/GithubUserList'
+import GithubUserSearchInput from 'github-users/components/GithubUserSearchInput'
 
 import { useFetchJson } from 'utils/hooks/useFetchJson'
 
