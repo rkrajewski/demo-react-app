@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Accordion, AccordionDetails, AccordionSummary, Alert, Avatar, Box, Link, Typography } from '@mui/material'
 
-import { fetchJson } from 'utils/common/fetchJson'
+import { useFetchJson } from 'utils/hooks/useFetchJson'
 
 import { IGithubApiRepository, IGithubUser } from '../types'
 
@@ -20,21 +20,12 @@ function GithubUser(props: Props) {
 
   const [expanded, setExpanded] = useState(false)
   const toggleExpanded = () => setExpanded(_expanded => !_expanded)
-
   const [repos, setRepos] = useState<IGithubApiRepository[]>()
-  const [error, setError] = useState<string>()
+  const { error, fetch } = useFetchJson<IGithubApiRepository[]>(setRepos)
 
-  const onAccordionOpen = async () => {
-    try {
-      const result = await fetchJson<IGithubApiRepository[]>(user.repos_url)
-      setRepos(result)
-    } catch (exception) {
-      setError(`Can't fetch repositories: ${exception}`)
-    }
-  }
+  const onAccordionOpen = () => fetch(user.repos_url)
   const onAccordionClose = () => {
     setTimeout(() => {
-      setError(undefined)
       setRepos(undefined)
     }, accordionAnimationEndTimeout)
   }
@@ -63,7 +54,7 @@ function GithubUser(props: Props) {
         </Box>
       </AccordionSummary>
       <AccordionDetails>
-        {error ? <Alert severity="error">{error}</Alert> : <GithubRepositoryList repos={repos} />}
+        {error ? <Alert severity="error">{String(error)}</Alert> : <GithubRepositoryList repos={repos} />}
       </AccordionDetails>
     </Accordion>
   )
