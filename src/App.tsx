@@ -1,14 +1,14 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 
-import Root from 'modules/root'
+import GithubUsersRoot from 'modules/github-users/components/GithubUsersRoot'
 
 import store from './store'
 
 function App() {
   return (
     <Provider store={store}>
-      <Root />
+      <GithubUsersRoot />
     </Provider>
   )
 }

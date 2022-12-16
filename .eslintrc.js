@@ -60,6 +60,7 @@ module.exports = {
     quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'react/no-unused-prop-types': ['warn'],
+    'react/require-default-props': 'off',
     'react/style-prop-object': ['error', { allow: ['StatusBar'] }],
     semi: ['error', 'never'],
     'sort-imports': [
