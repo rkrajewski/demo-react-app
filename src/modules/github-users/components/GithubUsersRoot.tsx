@@ -1,30 +1,28 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import { Alert, Box } from '@mui/material'
 import GithubUserList from 'modules/github-users/components/GithubUserList'
 import GithubUserSearchInput from 'modules/github-users/components/GithubUserSearchInput'
 
+import { useFetchJson } from 'utils/hooks/useFetchJson'
+
 import { githubUsersFeature } from '../store'
-import { fetchGithubUsers } from '../utils/fetchGithubUsers'
+import { IGithubUser } from '../types'
+import { createUrlGithubApiSearchUsers } from '../utils/createUrlGithubApiSearchUsers'
+
+interface IGithubApiUsersResponse {
+  items: IGithubUser[]
+  total_count: number
+}
 
 function GithubUsersRoot() {
   const dispatch = useDispatch()
-  const [error, setError] = useState<string>()
-  const [loading, setLoading] = useState(false)
+  const { error, loading, fetch } = useFetchJson<IGithubApiUsersResponse>(ghUsersResult => {
+    dispatch(githubUsersFeature.actions.updateUsers(ghUsersResult?.items || []))
+  })
   const search = async (name: string) => {
-    try {
-      setError(undefined)
-      setLoading(true)
-
-      const ghUsersResult = await fetchGithubUsers({ name })
-
-      dispatch(githubUsersFeature.actions.updateUsers(ghUsersResult.items))
-    } catch (exception) {
-      setError(String(exception))
-    } finally {
-      setLoading(false)
-    }
+    await fetch(createUrlGithubApiSearchUsers({ name }))
   }
 
   return (
@@ -37,7 +35,7 @@ function GithubUsersRoot() {
       }}
     >
       <GithubUserSearchInput loading={loading} onSearch={search} />
-      {error ? <Alert severity="error">{error}</Alert> : <GithubUserList />}
+      {error ? <Alert severity="error">{String(error)}</Alert> : <GithubUserList />}
     </Box>
   )
 }
