@@ -37,7 +37,7 @@ function GithubUsersRoot() {
       }}
     >
       <GithubUserSearchInput loading={loading} onSearch={search} />
-      {error ? <Alert severity="error">{error}</Alert> : null}
+      {error ? <Alert severity="error">{error}</Alert> : <GithubUserList />}
     </Box>
   )
 }
