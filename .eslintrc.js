@@ -57,8 +57,9 @@ module.exports = {
     'prefer-arrow-callback': ['error', { allowNamedFunctions: true }],
     'prefer-const': ['error'],
     'prettier/prettier': ['error'],
-    quotes: ['error', 'single'],
+    quotes: ['error', 'single', { allowTemplateLiterals: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
+    'react/no-unused-prop-types': ['warn'],
     'react/style-prop-object': ['error', { allow: ['StatusBar'] }],
     semi: ['error', 'never'],
     'sort-imports': [
